@@ -28,7 +28,7 @@ const Services = () => {
             name: 'Teeth Whitening',
             description: "Teeth whitening involves bleaching your teeth to make them lighter. It can't make your teeth brilliant white, but it can lighten the existing colour by several shades.",
             img: whitening
-        },
+        }
     ]
 
     return (
