@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
-   
     const { register, formState: { errors }, handleSubmit } = useForm();
+    
+    const { createUser } = useContext(AuthContext);
 
     const handleSignUp = data => {
         console.log(data);
+        createUser( data.email, data.password)
+        .then(result => {
+            const user =  result.user;
+            console.log(user);
+        })
+        .catch( error => console.error(error))
     }
 
 
@@ -35,7 +42,7 @@ const SignUp = () => {
                 <div className="form-control w-full max-w-xs">
                     <label className="label"><span className="label-text">Password</span></label>
                     <input type='password'
-                    {...register("password", {required: 'Please Enter Correct Password',  minLength: {value: 6, message: 'Password must be 6 characters or longer'} })} 
+                    {...register("password", {required: 'Please Enter Correct Password',  minLength: {value: 6, message: 'Password must be 6 characters or longer'}, pattern: { value: /(?=.*[a-z])(?=.*[@$!%*#?&])(?=.*[0-9])/, message: 'Password must be strong'} })} 
                     className='input input-bordered w-full max-w-xs' />
                     {errors.password && <p className='text-red-600 text-center text-xl my-1'>{errors.password?.message}</p>}
                     <label className="label"><span className="label-text"> Forget Password?</span></label>
