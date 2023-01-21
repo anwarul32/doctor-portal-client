@@ -5,17 +5,17 @@ import BookingModal from '../BookingModal/BookingModal';
 import AppointmentOption from './AppointmentOption';
 
 const AvailableAppointment = ({ selectedDate }) => {
-  
+
     const [treatment, setTreatment] = useState(null);
 
-const { data : appointmentOptions = [] } = useQuery({
-    queryKey: ['appointmentOptions'],
-    queryFn: async () => {
-        const res = await fetch('http://localhost:5000/appointmentOptions');
-        const data = await res.json();
-        return data;
-    }
-})
+    const { data: appointmentOptions = [] } = useQuery({
+        queryKey: ['appointmentOptions'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/appointmentOptions');
+            const data = await res.json();
+            return data;
+        }
+    })
 
     return (
         <section className='my-1o'>
